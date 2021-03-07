@@ -10,20 +10,18 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     
     if !params[:ratings].nil?
-      @ratings = params[:ratings].keys
-      @sort = params[:sort]
       session[:ratings] = params[:ratings].keys
       session[:sort] = params[:sort]
     else
       @ratings = Movie.all_ratings
     end
     
-    @ratings_to_show = session[:ratings]
+    @ratings_to_show = session[:ratings] 
 
     if !session[:sort].nil?
       @movies = Movie.order_by(session[:sort], session[:ratings])
     else
-      @movies = Movie.with_ratings(@ratings)
+      @movies = Movie.with_ratings(session[:ratings])
     end
   end
   
