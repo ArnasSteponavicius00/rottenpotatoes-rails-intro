@@ -10,10 +10,10 @@ class Movie < ActiveRecord::Base
     # if ratings_list is an array such as ['G', 'PG', 'R'], retrieve all
     # movies with those ratings
     # if ratings_list is nil, retrieve ALL movies
-    if ratings && ratings.empty? or ratings.nil? 
-       return Movie.all
-    else
+    if !ratings.nil?
       return Movie.where(rating: ratings)
+    else
+      return Movie.all
     end
   end
   
